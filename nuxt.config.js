@@ -30,13 +30,13 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    // '~/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify'
   ],
   /*
@@ -51,7 +51,8 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {
+  axios: { 
+    baseURL: 'http://127.10.10.1:8000/api/v1'
   },
   /*
   ** vuetify module configuration
