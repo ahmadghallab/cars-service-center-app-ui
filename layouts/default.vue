@@ -11,7 +11,7 @@
         dense
       >
 
-        <!-- lg -->
+        <!-- lg
         <v-list-group no-action>
           <template v-slot:activator>
             <v-list-item-content>
@@ -30,7 +30,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
-        <!-- /lg -->
+        /lg -->
 
         <v-list-item-group
           v-model="group"
@@ -48,6 +48,10 @@
             <v-list-item-title>Vehicles</v-list-item-title>
           </v-list-item>
 
+          <v-list-item to="customers">
+            <v-list-item-title>Customers</v-list-item-title>
+          </v-list-item>
+
           <v-list-item>
             <v-list-item-title>Finance</v-list-item-title>
           </v-list-item>
@@ -59,7 +63,7 @@
       fixed
       app
       dark
-      color="black"
+      color="orange"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
