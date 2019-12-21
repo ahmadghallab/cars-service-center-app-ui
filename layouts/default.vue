@@ -63,7 +63,7 @@
       fixed
       app
       dark
-      color="orange"
+      color="amber"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
@@ -78,12 +78,12 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer
+    <!-- <v-footer
       :fixed="fixed"
       app
     >
       <span>&copy; Ahmad Ghallab</span>
-    </v-footer>
+    </v-footer> -->
   </v-app>
 </template>
 
@@ -99,3 +99,14 @@ export default {
   }
 }
 </script>
+<style>
+  .v-pagination__navigation, .v-pagination__item, .v-pagination__item--active {
+    box-shadow: none !important;
+  }
+  .v-pagination__item--active {
+    pointer-events: none;
+  }
+  .v-pagination__navigation:focus, .v-pagination__item:focus {
+    outline: none !important;
+  }
+</style>
