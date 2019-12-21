@@ -11,7 +11,6 @@
                     :loading="searchingCustomers" loading-text="Loading... Please wait"
                     :headers="headers"
                     :items="customers"
-                    :search="search"
                     :server-items-length="pagination.total"
                     hide-default-footer
                     :fixed-header="true"

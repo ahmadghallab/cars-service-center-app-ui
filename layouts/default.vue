@@ -63,7 +63,7 @@
       fixed
       app
       dark
-      color="amber"
+      color="pink accent-2"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
@@ -99,14 +99,3 @@ export default {
   }
 }
 </script>
-<style>
-  .v-pagination__navigation, .v-pagination__item, .v-pagination__item--active {
-    box-shadow: none !important;
-  }
-  .v-pagination__item--active {
-    pointer-events: none;
-  }
-  .v-pagination__navigation:focus, .v-pagination__item:focus {
-    outline: none !important;
-  }
-</style>
