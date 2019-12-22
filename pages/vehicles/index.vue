@@ -73,7 +73,6 @@
                                                       item-text="name"
                                                       item-value="id"
                                                       label="Customer"
-                                                      return-object
                                                   ></v-autocomplete>
                                                 </v-col>
                                             </v-row>
@@ -271,10 +270,9 @@ export default {
           }
         },
         searchCustomerQuery (val) {
-          if (this.customers.length > 0) return
 
           if (this.fetchingCustomers) return
-
+         
           this.fetchingCustomers = true
 
           this.searchCustomer()
@@ -305,7 +303,6 @@ export default {
                 let response = await this.$axios.$get('/makes');
                 this.makes = response                
                 this.loadingAllMakes = false
-                if (this.editedIndex != -1) this.getModelsByMake()
             } catch (e) {
                 console.log(e);
             }
@@ -341,6 +338,7 @@ export default {
 
         searchCustomer: debounce(async function () {
             try {
+                if (!this.searchCustomerQuery) this.searchCustomerQuery = this.editedVehicle.customer.id
                 let response = await this.$axios.$get(`/customers?q=${this.searchCustomerQuery}`);
                 this.customers = response.data 
                 this.fetchingCustomers = false
@@ -353,6 +351,8 @@ export default {
             this.editedIndex = this.vehicles.indexOf(item)
             this.editedVehicle = Object.assign({}, item)
             this.dialog = true
+            this.getModelsByMake()
+            this.searchCustomer()
         },
 
         deleteVehicleConfirm (item) {
@@ -385,7 +385,17 @@ export default {
             this.saving = true
             if (this.editedIndex > -1) {
                 try {
-                    await this.$axios.$patch(`/vehicles/${this.editedVehicle.id}`, this.editedVehicle) 
+                    const data = {
+                      'vin': this.editedVehicle.vin,
+                      'engine': this.editedVehicle.engine,
+                      'licence_plate': this.editedVehicle.licence_plate,
+                      'counter': this.editedVehicle.counter,
+                      'make': this.editedVehicle.make.id,
+                      'make_model': this.editedVehicle.make_model.id,
+                      'customer': this.editedVehicle.customer.id
+                    }
+                    
+                    await this.$axios.$patch(`/vehicles/${this.editedVehicle.id}`, data) 
                     Object.assign(this.vehicles[this.editedIndex], this.editedVehicle)
                 } catch (e) {
 
@@ -399,10 +409,8 @@ export default {
                       'counter': this.editedVehicle.counter,
                       'make': this.editedVehicle.make.id,
                       'make_model': this.editedVehicle.make_model.id,
-                      'customer': this.editedVehicle.customer
+                      'customer': this.editedVehicle.customer.id
                     }
-
-                    console.log(data)
                     
                     const response = await this.$axios.$post('/vehicles', data) 
                     this.vehicles.push(this.editedVehicle)
